@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project</title>
+  <style>
+      main {
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        margin: auto;
+      }
+
+      form {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+      }
+
+      form > * {
+        margin: 5px 0;
+      }
+
+      form button {
+        width: 30%;
+        margin: 5px auto;
+      }
+
+      main > div {
+        margin: 20px 0;
+      }
+  </style>
+</head>
+<body>
+  <main>
+      <form action="" method="POST">
+        <label for="url">Enter image url</label>
+        <input name="url" type="text" value={{request.form.url}}>
+        <button type="submit" value="submit">Classify img</button>
+      </form>
+  
+      <div>
+        {% if data  %}
+          <img src={{data.url}} alt="img" />
+          <h3>Results</h3>
+          <ol>
+            {% for item in data.info %}
+              <li>{{item}}: {{data.info[item] | two_point}}%</li>
+            {% endfor %}
+          </ol>
+        {% endif %}
+      </div>
+  </main>
+</body>
+</html>
